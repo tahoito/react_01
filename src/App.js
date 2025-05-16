@@ -1,8 +1,17 @@
 // src/App.js
 import React from "react";
 
-function App() {
-  return <h1>Hello from App component!</h1>;
+function MyButton(){
+  return (
+    <button>I am a button.</button>
+  );
 }
 
-export default App;
+export default function MyApp(){
+  return(
+    <div>
+      <h1>Welcome to MyApp</h1>
+      <MyButton />
+    </div>
+  );
+}
