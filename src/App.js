@@ -1,16 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-function AboutPage() {
-  return (
-    <>
-      <h1>About</h1>
-      <p>Hello.<br />How do you do?</p>
-    </>
-  );
-}
 
-function MyButton() {
+export default function MyApp() {
   const [count, setCount] = useState(0);
 
   function handleClick() {
@@ -18,35 +11,24 @@ function MyButton() {
   }
 
   return (
-    <button onClick={handleClick}>
+    <div>
+      <h1>It is about Button</h1>
+      <MyButton count={count} onClick={handleClick} />
+      <MyButton count={count} onClick={handleClick} />
+    </div>
+  );
+
+}
+
+function MyButton({ count, onClick }){
+  return(
+    <button onClick={onClick}>
       Clicked {count} times
     </button>
   );
 }
+MyButton.propTypes = {
+  count: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired
+};
 
-const products = [
-  { title: 'Cabbage', isFruit: false, id: 1 },
-  { title: 'Apple', isFruit: false, id: 2 },
-  { title: 'Google', isFruit: true, id: 3 },
-];
-
-export default function MyApp() {
-  const listItems = products.map(product =>
-    <li
-      key={product.id}
-      style={{
-        color: product.isFruit ? 'magenta' : 'darkgreen'
-      }}
-    >
-      {product.title}
-    </li>
-  );
-
-  return (
-    <div>
-      <ul>{listItems}</ul>
-      <MyButton />
-      <AboutPage />
-    </div>
-  );
-}
