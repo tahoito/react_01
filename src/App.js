@@ -1,17 +1,52 @@
-// src/App.js
-import React from "react";
+import React from 'react';
+import { useState } from 'react';
 
-function MyButton(){
+function AboutPage() {
   return (
-    <button>I am a button.</button>
+    <>
+      <h1>About</h1>
+      <p>Hello.<br />How do you do?</p>
+    </>
   );
 }
 
-export default function MyApp(){
-  return(
+function MyButton() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+
+const products = [
+  { title: 'Cabbage', isFruit: false, id: 1 },
+  { title: 'Apple', isFruit: false, id: 2 },
+  { title: 'Google', isFruit: true, id: 3 },
+];
+
+export default function MyApp() {
+  const listItems = products.map(product =>
+    <li
+      key={product.id}
+      style={{
+        color: product.isFruit ? 'magenta' : 'darkgreen'
+      }}
+    >
+      {product.title}
+    </li>
+  );
+
+  return (
     <div>
-      <h1>Welcome to MyApp</h1>
+      <ul>{listItems}</ul>
       <MyButton />
+      <AboutPage />
     </div>
   );
 }
