@@ -20,6 +20,16 @@ function FilterableProductTable({ products }) {
   );
 }
 
+FilterableProductTable.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    category: PropTypes.string,
+    price: PropTypes.string,
+    stocked: PropTypes.bool,
+    name: PropTypes.string,
+  })).isRequired,
+};
+
+
 function ProductCategoryRow({ category }) {
   return (
     <tr>
@@ -43,6 +53,17 @@ function ProductRow({ product }) {
     </tr>
   );
 }
+
+import PropTypes from 'prop-types';
+
+ProductRow.propTypes = {
+  product: PropTypes.shape({
+    stocked: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 
 function ProductTable({ products, filterText, inStockOnly }) {
   const rows = [];
@@ -87,7 +108,7 @@ function ProductTable({ products, filterText, inStockOnly }) {
   );
 }
 
-function SearchBar({ filterText, inStockOnly }) {
+function SearchBar({ filterText, inStockOnly, onFilterTextChange, onInStockOnlyChange }) {
   return (
     <form>
       <input 
@@ -107,6 +128,7 @@ function SearchBar({ filterText, inStockOnly }) {
   );
 }
 
+
 const PRODUCTS = [
   {category: "Fruits", price: "$1", stocked: true, name: "Apple"},
   {category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},
@@ -119,3 +141,26 @@ const PRODUCTS = [
 export default function App() {
   return <FilterableProductTable products={PRODUCTS} />;
 }
+
+
+ProductCategoryRow.propTypes = {
+  category: PropTypes.string.isRequired,
+};
+
+ProductTable.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    category: PropTypes.string,
+    price: PropTypes.string,
+    stocked: PropTypes.bool,
+    name: PropTypes.string,
+  })).isRequired,
+  filterText: PropTypes.string.isRequired,
+  inStockOnly: PropTypes.bool.isRequired,
+};
+
+SearchBar.propTypes = {
+  filterText: PropTypes.string.isRequired,
+  inStockOnly: PropTypes.bool.isRequired,
+  onFilterTextChange: PropTypes.func.isRequired,
+  onInStockOnlyChange: PropTypes.func.isRequired,
+};
